@@ -1,6 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import { Card, ListGroup } from "react-bootstrap";
+import { getRepositories } from "../../services/local/localData";
 
 const StyledCardImg = styled(Card.Img)`
   width: 180px;
@@ -18,22 +20,46 @@ const StyledCardBody = styled(Card.Body)`
   }
 `;
 
-const UserDetail = () => (
-  <Card>
-    <StyledCardBody>
-      <StyledCardImg variant="top" src="https://github.githubassets.com/images/modules/logos_page/Octocat.png" />
-      <Card.Title>
-        Marco<br />Carminati
-      </Card.Title>
-    </StyledCardBody>
-    <Card.Body>
-      <Card.Title>Repositories</Card.Title>
-      <ListGroup>
-        <ListGroup.Item>Linus Torvalds</ListGroup.Item>
-        <ListGroup.Item>Marco Carminati</ListGroup.Item>
-        <ListGroup.Item>Another developer</ListGroup.Item>
-      </ListGroup>
-    </Card.Body>
-  </Card>
-);
-export default UserDetail;
+const repositories = getRepositories();
+
+class UserDetail extends Component {
+  render() {
+    const { selectedUser } = this.props;
+
+    return (
+      selectedUser && (
+        <Card>
+          <StyledCardBody>
+            <StyledCardImg variant="top" src={selectedUser.avatar_url} />
+            <Card.Body>
+              <Card.Title>{selectedUser.login}</Card.Title>
+              <Card.Subtitle>
+                <div>
+                  <span>Type:</span> {selectedUser.type}
+                </div>
+                <div>
+                  <span>Score:</span> {selectedUser.score}
+                </div>
+              </Card.Subtitle>
+            </Card.Body>
+          </StyledCardBody>
+          <Card.Body>
+            <Card.Title>Repositories</Card.Title>
+            <ListGroup>
+              {repositories.map(repository => (
+                <ListGroup.Item key={repository.id}>{repository.name}</ListGroup.Item>
+              ))}
+            </ListGroup>
+          </Card.Body>
+        </Card>
+      )
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  const { selectedUser } = state;
+  return { selectedUser };
+};
+
+export default connect(mapStateToProps)(UserDetail);
