@@ -35,7 +35,7 @@ function App() {
       </Header>
       <StyledContainer fluid={true}>
         <Row>
-          <Col>
+          <Col xs lg="3">
             <UserList />
           </Col>
           <Col>
