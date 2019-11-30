@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Card, ListGroup } from "react-bootstrap";
-import { getRepositories } from "../../services/local/localData";
+import { getRepositories } from "../../services";
 
 const StyledCardImg = styled(Card.Img)`
   width: 180px;
@@ -19,8 +19,6 @@ const StyledCardBody = styled(Card.Body)`
     margin-left: 5px;
   }
 `;
-
-const repositories = getRepositories();
 
 class UserDetail extends Component {
   render() {
@@ -46,7 +44,7 @@ class UserDetail extends Component {
           <Card.Body>
             <Card.Title>Repositories</Card.Title>
             <ListGroup>
-              {repositories.map(repository => (
+              {getRepositories(selectedUser.id).map(repository => (
                 <ListGroup.Item key={repository.id}>{repository.name}</ListGroup.Item>
               ))}
             </ListGroup>

@@ -4,6 +4,6 @@ export const getUsers = () => {
   return getUsersLocal();
 };
 
-export const getRepositories = () => {
-  return getRepositoriesLocal();
+export const getRepositories = userId => {
+  return getRepositoriesLocal(userId);
 };

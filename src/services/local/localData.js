@@ -5,6 +5,6 @@ export const getUsers = () => {
   return usersData.items;
 };
 
-export const getRepositories = () => {
-  return repositoriesData;
+export const getRepositories = userId => {
+  return repositoriesData.filter(repository => repository.owner.id === userId);
 };
