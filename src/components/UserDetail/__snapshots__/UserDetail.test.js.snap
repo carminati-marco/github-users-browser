@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`shallow without crashing 1`] = `
-"<ContextProvider value={{...}}>
-  <Connect(UserDetail) />
-</ContextProvider>"
-`;
+exports[`UserDetail test ListGroupItem toggle activate 1`] = `ReactWrapper {}`;
+
+exports[`UserDetail test renders correctly 1`] = `ReactWrapper {}`;

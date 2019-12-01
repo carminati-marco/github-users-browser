@@ -11,6 +11,5 @@ it("shallow without crashing", () => {
       <App />
     </Provider>
   );
-  let tree = component.debug();
-  expect(tree).toMatchSnapshot();
+  expect(component).toMatchSnapshot();
 });

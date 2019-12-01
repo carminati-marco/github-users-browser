@@ -15,7 +15,8 @@ class UserList extends Component {
   state = { users: getUsers(), selectedUserId: null, search: null };
 
   handleChange(event) {
-    this.setState({ search: event.target.value });
+    this.setState({ search: event.target.value, selectedUserId: null });
+    this.props.setUser(null);
   }
 
   handleClickListItem(event) {
@@ -29,7 +30,7 @@ class UserList extends Component {
   render() {
     const { users, selectedUserId, search } = this.state;
 
-    const filteredUser = search ? users.filter(user => _.includes(user.login, search)) : users;
+    const filteredUser = search ? users.filter(user => _.includes(user.login.toUpperCase(), search.toUpperCase())) : users;
 
     return (
       <div>
