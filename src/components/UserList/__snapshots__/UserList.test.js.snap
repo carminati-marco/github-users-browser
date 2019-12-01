@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+<div>
+  <div
+    className="mb-3 input-group"
+  >
+    <input
+      aria-describedby="basic-addon1"
+      aria-label="Search"
+      className="sc-bdVaJa eEvTZI form-control"
+      onChange={[Function]}
+      placeholder="Search.."
+    />
+  </div>
+  <div
+    className="list-group"
+    onKeyDown={[Function]}
+  >
+    <div
+      className="list-group-item"
+      data-rb-event-key="1455447"
+      disabled={false}
+      onClick={[Function]}
+    >
+      rparent
+    </div>
+    <div
+      className="list-group-item"
+      data-rb-event-key="1455367"
+      disabled={false}
+      onClick={[Function]}
+    >
+      gtnx
+    </div>
+    <div
+      className="list-group-item"
+      data-rb-event-key="20163150"
+      disabled={false}
+      onClick={[Function]}
+    >
+      FredericBallot
+    </div>
+  </div>
+</div>
+`;
