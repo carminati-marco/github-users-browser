@@ -16,9 +16,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest --watch",
+    "test:update": "jest --watch --updateSnapshot",
     "eject": "react-scripts eject"
   },
   "jest": {
+    "testRegex": "((\\.|/*.)(test))\\.js?$",
+    "setupFilesAfterEnv": ["<rootDir>/jest.setup.js"],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
@@ -44,6 +47,8 @@
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
     "babel-jest": "^24.9.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
     "jest": "^24.9.0",
     "react-test-renderer": "^16.12.0"
   }

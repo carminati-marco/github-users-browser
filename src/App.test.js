@@ -1,17 +1,16 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import App from "./App";
 import { Provider } from "react-redux";
-import renderer from "react-test-renderer";
 
 import store from "./redux/store";
+import { shallow } from "enzyme";
 
-it("renders without crashing", () => {
-  const component = renderer.create(
+it("shallow without crashing", () => {
+  const component = shallow(
     <Provider store={store}>
       <App />
     </Provider>
   );
-  let tree = component.toJSON();
+  let tree = component.debug();
   expect(tree).toMatchSnapshot();
 });

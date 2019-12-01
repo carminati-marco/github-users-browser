@@ -3,14 +3,14 @@ import { Provider } from "react-redux";
 
 import store from "../../redux/store";
 import UserDetail from "./index";
-import renderer from "react-test-renderer";
+import { shallow } from "enzyme";
 
-it("renders without crashing", () => {
-  const component = renderer.create(
+it("shallow without crashing", () => {
+  const component = shallow(
     <Provider store={store}>
       <UserDetail />
     </Provider>
   );
-  let tree = component.toJSON();
+  let tree = component.debug();
   expect(tree).toMatchSnapshot();
 });
