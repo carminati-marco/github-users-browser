@@ -44,7 +44,7 @@ class UserDetail extends Component {
           <Card.Body>
             <Card.Title>Repositories</Card.Title>
             <ListGroup>
-              {getRepositories(selectedUser.id).map(repository => (
+              {getRepositories(selectedUser.login).map(repository => (
                 <ListGroup.Item key={repository.id}>{repository.name}</ListGroup.Item>
               ))}
             </ListGroup>

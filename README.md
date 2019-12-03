@@ -3,19 +3,33 @@
 ### Docker
 if you want to use [docker](https://docs.docker.com/) and [docker-compose](https://docs.docker.com/compose/), in the project directory just run:
 
-### `make ultimate`
+#### `make ultimate`
 
 The project will run at http://localhost:3001/
+
+The tests: you can launch the follow command in docker
+
+#### `docker-compose exec frontend yarn test`
+
 
 ### Local
 Using [yarn](https://yarnpkg.com/lang/en/), in the root directory run
 
-### `yarn && yarn:start`
+### `yarn && yarn start`
 
 The project will run at http://localhost:3000/
 
+Test? Just launch
 
->  To follow, documentation from "Create React App"
+#### `yarn test` 
+or 
+#### `yarn test:update` 
+to update the snapshot + manage the watch usage
+
+------------
+
+
+>  To follow, the original documentation from "Create React App"
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

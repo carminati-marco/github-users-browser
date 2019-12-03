@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import _ from "lodash";
 import { ListGroup, InputGroup, FormControl } from "react-bootstrap";
 import styled from "styled-components";
 
@@ -12,10 +11,17 @@ const StyledFormControl = styled(FormControl)`
 `;
 
 class UserList extends Component {
-  state = { users: getUsers(), selectedUserId: null, search: null };
+  state = { users: [], selectedUserId: null, search: null };
 
-  handleChange(event) {
-    this.setState({ search: event.target.value, selectedUserId: null });
+  async componentDidMount() {
+    const users = await getUsers();
+    this.setState({ users });
+  }
+
+  async handleChange(event) {
+    const search = event.target.value;
+    const users = await getUsers(search);
+    this.setState({ search, users, selectedUserId: null });
     this.props.setUser(null);
   }
 
@@ -28,10 +34,7 @@ class UserList extends Component {
   }
 
   render() {
-    const { users, selectedUserId, search } = this.state;
-
-    const filteredUser = search ? users.filter(user => _.includes(user.login.toUpperCase(), search.toUpperCase())) : users;
-
+    const { users = [], selectedUserId } = this.state;
     return (
       <div>
         <InputGroup className="mb-3">
@@ -43,7 +46,7 @@ class UserList extends Component {
           />
         </InputGroup>
         <ListGroup activeKey={selectedUserId}>
-          {filteredUser.map(user => (
+          {users.map(user => (
             <ListGroup.Item onClick={() => this.handleClickListItem(user.id)} key={user.id} eventKey={user.id}>
               {user.login}
             </ListGroup.Item>
