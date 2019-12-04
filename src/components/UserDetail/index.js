@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { Card, ListGroup } from "react-bootstrap";
+import { Card, ListGroup, Spinner } from "react-bootstrap";
 
 const StyledCardImg = styled(Card.Img)`
   width: 180px;
@@ -18,6 +18,24 @@ const StyledCardBody = styled(Card.Body)`
     margin-left: 5px;
   }
 `;
+
+const Repositories = ({ repositories }) => {
+  if (!repositories) {
+    return (
+      <Spinner animation="border" role="status">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    );
+  } else {
+    return (
+      <ListGroup>
+        {repositories.map(repository => (
+          <ListGroup.Item key={repository.id}>{repository.name}</ListGroup.Item>
+        ))}
+      </ListGroup>
+    );
+  }
+};
 
 class UserDetail extends Component {
   render() {
@@ -42,10 +60,7 @@ class UserDetail extends Component {
           </StyledCardBody>
           <Card.Body>
             <Card.Title>Repositories</Card.Title>
-            <ListGroup>
-              {selectedRepositories &&
-                selectedRepositories.map(repository => <ListGroup.Item key={repository.id}>{repository.name}</ListGroup.Item>)}
-            </ListGroup>
+            <Repositories repositories={selectedRepositories} />
           </Card.Body>
         </Card>
       )
