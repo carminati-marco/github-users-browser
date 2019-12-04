@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { ListGroup, InputGroup, FormControl } from "react-bootstrap";
 import styled from "styled-components";
 
-import { setUser } from "../../redux/actions";
-import { getUsers } from "../../services";
+import { setUser, setRepositories } from "../../redux/actions";
+import { getUsers, getRepositories } from "../../services";
 
 const StyledFormControl = styled(FormControl)`
   border-radius: 25px;
@@ -23,14 +23,18 @@ class UserList extends Component {
     const users = await getUsers(search);
     this.setState({ search, users, selectedUserId: null });
     this.props.setUser(null);
+    this.props.setRepositories(null);
   }
 
-  handleClickListItem(event) {
+  async handleClickListItem(event) {
     const selectedUserId = this.state.selectedUserId === event ? null : event;
     this.setState({ selectedUserId });
+    this.props.setRepositories(null);
 
     const user = this.state.users.find(user => user.id === selectedUserId);
     this.props.setUser(user || null);
+    const repositories = user ? await getRepositories(user.login) : null;
+    this.props.setRepositories(repositories);
   }
 
   render() {
@@ -59,5 +63,5 @@ class UserList extends Component {
 
 export default connect(
   null,
-  { setUser }
+  { setUser, setRepositories }
 )(UserList);

@@ -1,5 +1,5 @@
 import { getUsers as getUsersLocal, getRepositories as getRepositoriesLocal } from "./local/localData";
-import { getUsers as getUsersOnline } from "./api";
+import { getUsers as getUsersOnline, getRepositories as getRepositoriesOnline } from "./api";
 
 export const getUsers = async search => {
   try {
@@ -10,7 +10,11 @@ export const getUsers = async search => {
   }
 };
 
-export const getRepositories = login => {
-  // todo: integrate call to "getRepositoriesOnline"
-  return getRepositoriesLocal(login);
+export const getRepositories = async login => {
+  try {
+    let res = await getRepositoriesOnline(login);
+    return res;
+  } catch (error) {
+    return getRepositoriesLocal(login);
+  }
 };

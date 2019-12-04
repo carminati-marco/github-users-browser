@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Card, ListGroup } from "react-bootstrap";
-import { getRepositories } from "../../services";
 
 const StyledCardImg = styled(Card.Img)`
   width: 180px;
@@ -22,7 +21,7 @@ const StyledCardBody = styled(Card.Body)`
 
 class UserDetail extends Component {
   render() {
-    const { selectedUser } = this.props;
+    const { selectedUser, selectedRepositories } = this.props;
 
     return (
       selectedUser && (
@@ -44,9 +43,8 @@ class UserDetail extends Component {
           <Card.Body>
             <Card.Title>Repositories</Card.Title>
             <ListGroup>
-              {getRepositories(selectedUser.login).map(repository => (
-                <ListGroup.Item key={repository.id}>{repository.name}</ListGroup.Item>
-              ))}
+              {selectedRepositories &&
+                selectedRepositories.map(repository => <ListGroup.Item key={repository.id}>{repository.name}</ListGroup.Item>)}
             </ListGroup>
           </Card.Body>
         </Card>
@@ -56,8 +54,8 @@ class UserDetail extends Component {
 }
 
 const mapStateToProps = state => {
-  const { selectedUser } = state;
-  return { selectedUser };
+  const { selectedUser, selectedRepositories } = state;
+  return { selectedUser, selectedRepositories };
 };
 
 export default connect(mapStateToProps)(UserDetail);
