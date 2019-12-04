@@ -11,7 +11,10 @@ const StyledFormControl = styled(FormControl)`
 `;
 
 class UserList extends Component {
-  state = { users: [], selectedUserId: null, search: null };
+  constructor(props) {
+    super(props);
+    this.state = { users: [], selectedUserId: null };
+  }
 
   async componentDidMount() {
     const users = await getUsers();
@@ -21,18 +24,20 @@ class UserList extends Component {
   async handleChange(event) {
     const search = event.target.value;
     const users = await getUsers(search);
-    this.setState({ search, users, selectedUserId: null });
+    this.setState({ users, selectedUserId: null });
     this.props.setUser(null);
     this.props.setRepositories(null);
   }
 
   async handleClickListItem(event) {
-    const selectedUserId = this.state.selectedUserId === event ? null : event;
+    let { selectedUserId } = this.state;
+    selectedUserId = selectedUserId === event ? null : event;
     this.setState({ selectedUserId });
     this.props.setRepositories(null);
 
-    const user = this.state.users.find(user => user.id === selectedUserId);
+    const user = this.state.users.find(u => u.id === selectedUserId);
     this.props.setUser(user || null);
+
     const repositories = user ? await getRepositories(user.login) : null;
     this.props.setRepositories(repositories);
   }
@@ -51,7 +56,11 @@ class UserList extends Component {
         </InputGroup>
         <ListGroup activeKey={selectedUserId}>
           {users.map(user => (
-            <ListGroup.Item onClick={() => this.handleClickListItem(user.id)} key={user.id} eventKey={user.id}>
+            <ListGroup.Item
+              onClick={() => this.handleClickListItem(user.id)}
+              key={user.id}
+              eventKey={user.id}
+            >
               {user.login}
             </ListGroup.Item>
           ))}
@@ -61,7 +70,4 @@ class UserList extends Component {
   }
 }
 
-export default connect(
-  null,
-  { setUser, setRepositories }
-)(UserList);
+export default connect(null, { setUser, setRepositories })(UserList);

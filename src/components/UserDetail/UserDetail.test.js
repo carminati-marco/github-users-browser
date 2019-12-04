@@ -1,10 +1,10 @@
 import React from "react";
 import { Provider } from "react-redux";
 
+import { mount } from "enzyme";
 import store from "../../redux/store";
 import UserDetail from "./index";
 
-import { mount } from "enzyme";
 import App from "../../App";
 
 const flushPromises = () => new Promise(resolve => setImmediate(resolve));
@@ -26,11 +26,11 @@ describe("UserDetail test", () => {
     expect(component).toMatchSnapshot();
   });
 
-  it("Cart must be 0", () => {
-    expect(component.find(UserDetail).find("Card").length).toEqual(0);
+  it("cart must be 0", () => {
+    expect(component.find(UserDetail).find("Card")).toHaveLength(0);
   });
 
-  it("ListGroupItem toggle activate", async () => {
+  it("listGroupItem toggle activate", async () => {
     component
       .find("ListGroupItem")
       .first()
@@ -38,7 +38,7 @@ describe("UserDetail test", () => {
 
     await flushPromises();
     component.update();
-    expect(component.find(UserDetail).find("Card").length).toEqual(1);
+    expect(component.find(UserDetail).find("Card")).toHaveLength(1);
     expect(component).toMatchSnapshot();
 
     component
@@ -48,6 +48,6 @@ describe("UserDetail test", () => {
 
     await flushPromises();
     component.update();
-    expect(component.find(UserDetail).find("Card").length).toEqual(0);
+    expect(component.find(UserDetail).find("Card")).toHaveLength(0);
   });
 });

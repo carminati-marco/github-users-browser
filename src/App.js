@@ -1,9 +1,9 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import logo from "./logo.png";
 import styled from "styled-components";
 
 import { Container, Row, Col } from "react-bootstrap";
+import logo from "./logo.png";
 import UserList from "./components/UserList";
 import UserDetail from "./components/UserDetail/index";
 
@@ -33,7 +33,7 @@ function App() {
       <Header>
         <img src={logo} alt="Github" />
       </Header>
-      <StyledContainer fluid={true}>
+      <StyledContainer fluid>
         <Row>
           <Col xs lg="3">
             <UserList />

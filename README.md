@@ -11,6 +11,9 @@ The tests: you can launch the follow command in docker
 
 #### `docker-compose exec frontend yarn test`
 
+Linting
+#### `docker-compose exec frontend yarn lint`
+
 
 ### Local
 Using [yarn](https://yarnpkg.com/lang/en/), in the root directory run
@@ -25,6 +28,13 @@ Test? Just launch
 or 
 #### `yarn test:update` 
 to update the snapshot + manage the watch usage
+
+Linting
+#### `yarn lint`
+
+## Some note
+**Redux** has been added in order to reuse the store in future developments/components.
+In the last tag you can see the eslint configuration
 
 ------------
 

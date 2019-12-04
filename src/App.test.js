@@ -1,11 +1,11 @@
 import React from "react";
-import App from "./App";
 import { Provider } from "react-redux";
+import { shallow } from "enzyme";
+import App from "./App";
 
 import store from "./redux/store";
-import { shallow } from "enzyme";
 
-it("shallow without crashing", () => {
+test("shallow without crashing", () => {
   const component = shallow(
     <Provider store={store}>
       <App />

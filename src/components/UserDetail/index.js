@@ -26,15 +26,14 @@ const Repositories = ({ repositories }) => {
         <span className="sr-only">Loading...</span>
       </Spinner>
     );
-  } else {
-    return (
-      <ListGroup>
-        {repositories.map(repository => (
-          <ListGroup.Item key={repository.id}>{repository.name}</ListGroup.Item>
-        ))}
-      </ListGroup>
-    );
   }
+  return (
+    <ListGroup>
+      {repositories.map(repository => (
+        <ListGroup.Item key={repository.id}>{repository.name}</ListGroup.Item>
+      ))}
+    </ListGroup>
+  );
 };
 
 class UserDetail extends Component {
